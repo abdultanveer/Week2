@@ -1,5 +1,6 @@
 package com.spot.week2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,9 +23,15 @@ public class MainActivity extends AppCompatActivity {
                 Uri.parse("tel:12345678"));
         startActivity(dialIntent);*/
        Intent homeIntent = new Intent(MainActivity.this,HomeActivity.class);
-       homeIntent.putExtra("newparticipant","anil");
-       startActivity(homeIntent);
+       //homeIntent.putExtra("newparticipant","anil");
+       startActivityForResult(homeIntent,9);
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent mIntent) {
+        super.onActivityResult(requestCode, resultCode, mIntent);
+        String name = mIntent.getExtras().getString("name");
+        Toast.makeText(this,name, Toast.LENGTH_SHORT).show();
+    }
 }
